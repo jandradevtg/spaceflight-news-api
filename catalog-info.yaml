@@ -1,0 +1,65 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: spaceflight-news-api
+  description: API FastAPI que consome a Spaceflight News API (SNAPI) e expõe as últimas notícias.
+  annotations:
+    github.com/project-slug: jandradevtg/spaceflight-news-api
+  tags:
+    - python
+    - fastapi
+    - rest
+  links:
+    - url: http://localhost:8000/docs
+      title: Swagger UI
+      icon: docs
+spec:
+  type: service
+  lifecycle: experimental
+  owner: devops-team
+  providesApis:
+    - spaceflight-news-api   # liga o Component à entidade API declarada abaixo
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: spaceflight-news-api
+  description: Endpoints REST da Spaceflight News Proxy API.
+  tags:
+    - rest
+    - openapi
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: devops-team
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: Spaceflight News Proxy API
+      version: 1.0.0
+      description: Consome a Spaceflight News API (SNAPI) e expõe as últimas notícias.
+    servers:
+      - url: http://localhost:8000
+    paths:
+      /health:
+        get:
+          summary: Health check
+          responses:
+            '200':
+              description: Serviço saudável
+      /articles:
+        get:
+          summary: Lista as últimas notícias
+          parameters:
+            - name: limit
+              in: query
+              schema:
+                type: integer
+                default: 5
+            - name: search
+              in: query
+              schema:
+                type: string
+          responses:
+            '200':
+              description: Lista de notícias
