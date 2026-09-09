@@ -5,6 +5,7 @@ metadata:
   description: API FastAPI que consome a Spaceflight News API (SNAPI) e expõe as últimas notícias.
   annotations:
     github.com/project-slug: jandradevtg/spaceflight-news-api
+    backstage.io/techdocs-ref: dir:.
   tags:
     - python
     - fastapi
