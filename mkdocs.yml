@@ -1,0 +1,8 @@
+site_name: 'Spaceflight News Proxy API'
+site_description: 'Documentação técnica da API de notícias espaciais'
+
+nav:
+  - Home: index.md
+
+plugins:
+  - techdocs-core
